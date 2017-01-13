@@ -1,33 +1,43 @@
 #include <iostream>
-#include "traitement.h"
+#include <cmath>
+#include <windows.h>
+#include <vector>
 
-using namespace std;
+void getDiviseurs(unsigned long int &nombre, std::vector<unsigned long int> &tab) {
+	unsigned long int result_carre = sqrt(nombre);
+	unsigned long int racine_arrondie = floor(result_carre);
+	for (int i = 1; i <= racine_arrondie; i++) {
+		if (nombre % i == 0) {
+            //cout << i << endl;
+            //cout << nombre / i << endl;
+
+            tab.push_back(i);
+            tab.push_back(nombre / i);
+			//cout << "Le nombre " << nombre << " est un multiple de " << nombremultiples << " | Egalite : " << nombre / nombremultiples << " x " << nombremultiples << " = " << a << endl;
+		}
+	}
+}
+
 
 int main() {
-	int c;
-	double d;
+	unsigned long int c;
 
-	cout << "Bienvenue dans ce petit programme pour faire des divisions. \n";
-	cout << "Veulliez entrez 2 nombres : ";
+	std::cout << "Bienvenue dans ce petit programme pour avoir les diviseurs d'un nombre... \n";
+	std::cout << "Veulliez entrez un nombre :";
 	while (true) {
-		cin >> c;
-		cin >> d;
-		cout << "\nMaintenant choisissez le mode : \n";
-		cout << "	1. Recuperation des diviseurs du deuxième nombre. \n";
-		cout << "	2. Division.\n";
-		cout << "\nEntrez le chiffre du mode :";
-		int choix;
-		cin >> choix;
-		Traitement operation;
-		if (choix == 1) {
-			double diviseurs = operation.getDiviseurs(c, d);
-		}
-		else if (choix == 2) {
-			cout << "Mode en creation...\n";
-		}
-		cout << "Veulliez entrez 2 nouveaux nombres : ";
+        std::cin >> c;
+        std::vector<unsigned long int>diviseurs_a;
+        getDiviseurs(c, diviseurs_a);
+        std::cout << "Affichage du premier nombre...\n";
+        for(int i=1;i<diviseurs_a.size();i++){
+            std::cout<< i << " x " << diviseurs_a[i] << std::endl;
+            //cout<< i << " " << diviseurs_a[i+1] << endl;
+
+        }
+        //operation.Divise(c, d);
+        //operation.~Traitement();
+		std::cout << "\nVeulliez entrez un nombre :";
 	}
-	system("PAUSE");
-	cin.ignore();
+	std::cin.ignore();
 	return 0;
 }
